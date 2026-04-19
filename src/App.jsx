@@ -321,11 +321,11 @@ function ConversationLive({ phone, name, tenantId, tenant, token, onBack, onTena
 
   useEffect(() => {
     loadMessages();
-    pollRef.current = setInterval(loadMessages, 5000);
+    pollRef.current = setInterval(loadMessages, 3000);
     return () => clearInterval(pollRef.current);
   }, [loadMessages]);
 
-  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
+  useEffect(() => { if (messages.length > 0) bottomRef.current?.scrollIntoView({ behavior: "auto" }); }, [messages]);
 
   const pauseBot = async () => {
     setPausing(true);
@@ -552,8 +552,13 @@ function LiveTab({ conversations, tenantId, tenant, token, onTenantRefresh }) {
                   </div>
                   <span style={{ fontSize: 11, color: "var(--t3)" }}>il y a {diff} min</span>
                 </div>
-                {c.client_message && <div style={{ fontSize: 12, color: "var(--t2)", marginBottom: 2 }}>👤 {c.client_message.slice(0, 80)}</div>}
-                {c.bot_response && <div style={{ fontSize: 12, color: "var(--t3)" }}>{c.bot_active === "Pas actif" ? "🧑‍💼" : "🤖"} {c.bot_response.slice(0, 80)}</div>}
+                <div style={{ fontSize: 12, color: "var(--t2)", marginTop: 2 }}>
+                  {c.bot_response
+                    ? `${c.bot_active === "Pas actif" ? "🧑‍💼" : "🤖"} ${c.bot_response.slice(0, 80)}`
+                    : c.client_message
+                    ? `👤 ${c.client_message.slice(0, 80)}`
+                    : ""}
+                </div>
               </div>
             );
           })}

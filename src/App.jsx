@@ -313,10 +313,10 @@ function ConversationLive({ phone, name, tenantId, tenant, token, onBack, onTena
 
   const loadMessages = useCallback(async () => {
     const data = await SB.get("conversations",
-      `tenant_id=eq.${tenantId}&customer_phone=eq.${encodeURIComponent(phone)}&order=timestamp.asc&limit=100`,
+      `tenant_id=eq.${tenantId}&customer_phone=eq.${encodeURIComponent(phone)}&order=timestamp.desc&limit=100`,
       token
     );
-    if (Array.isArray(data)) setMessages(data);
+    if (Array.isArray(data)) setMessages([...data].reverse());
   }, [phone, tenantId, token]);
 
   useEffect(() => {

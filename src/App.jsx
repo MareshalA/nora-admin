@@ -669,7 +669,7 @@ function SettingsTab({ tenant, token, onRefresh, onLogout }) {
         </div>
         <div style={{ marginTop: 18, padding: 12, background: "var(--surface2)", borderRadius: 10 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: "var(--t2)", marginBottom: 4 }}>Lien booking</div>
-          <div style={{ fontSize: 11, color: "var(--accent2)", wordBreak: "break-all", fontFamily: "monospace" }}>{tenant.booking_url || `https://nora-booking.vercel.app?tenant=${tenant.id}`}</div>
+          <div style={{ fontSize: 11, color: "var(--accent2)", wordBreak: "break-all", fontFamily: "monospace" }}>{tenant.booking_url || `https://book.noreexa.com?tenant=${tenant.id}`}</div>
         </div>
         <button onClick={onLogout} style={{ ...btnSecondary, marginTop: 16, width: "100%", color: "var(--red)", borderColor: "var(--red)" }}>Déconnexion</button>
       </div>
